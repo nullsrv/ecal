@@ -194,6 +194,24 @@ System::String^ Publisher::Dump()
   return(StlStringToString(m_pub->Dump()));
 }
 
+bool Publisher::ShmEnableZeroCopy(bool state_)
+{
+  if(m_pub == nullptr) return(false);
+  return(m_pub->ShmEnableZeroCopy(state_));
+}
+
+bool Publisher::ShmSetBufferCount(int buffering_)
+{
+  if(m_pub == nullptr) return(false);
+  return(m_pub->ShmSetBufferCount(buffering_));
+}
+
+bool Publisher::ShmSetAcknowledgeTimeout(long long acknowledge_timeout_ms_)
+{
+  if(m_pub == nullptr) return(false);
+  return(m_pub->ShmSetAcknowledgeTimeout(acknowledge_timeout_ms_));
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 // Subscriber

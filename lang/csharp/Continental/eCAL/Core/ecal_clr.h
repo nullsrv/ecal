@@ -218,6 +218,34 @@ namespace Continental
         **/
         System::String^ Dump();
 
+        /**
+         * @brief Enable zero copy shared memory transport mode.
+         *
+         * @param state_  Set type zero copy mode for shared memory transport layer (true == zero copy enabled).
+         *
+         * @return  True if it succeeds, false if it fails.
+        **/
+        bool ShmEnableZeroCopy(bool state_);
+
+        /**
+         * @brief Set publisher maximum number of used shared memory buffers.
+         *
+         * @param buffering_  Maximum number of used buffers (needs to be greater than 1, default = 1).
+         *
+         * @return  True if it succeeds, false if it fails.
+        **/
+        bool ShmSetBufferCount(int buffering_);
+
+        /**
+         * @brief Force connected subscribers to send acknowledge event after processing the message and 
+         *        block publisher send call on this event with a timeout.
+         *
+         * @param acknowledge_timeout_ms_ timeout to wait for acknowledge signal from connected subscriber in ms (0 == no handshake).
+         *
+         * @return  True if it succeeds, false if it fails.
+        **/
+        bool ShmSetAcknowledgeTimeout(long long acknowledge_timeout_ms_);
+
       private:
         ::eCAL::CPublisher* m_pub;
       };
