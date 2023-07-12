@@ -163,9 +163,11 @@ bool Publisher::Destroy()
 size_t Publisher::Send(System::String^ s_, long long time_)
 {
   if(m_pub == nullptr) return(0);
-  void*  buf = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(s_).ToPointer();
+  System::IntPtr  buf = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(s_);
   size_t len = s_->Length;
-  return(m_pub->Send(buf, len, time_));
+  size_t sent = m_pub->Send(buf.ToPointer(), len, time_);
+  System::Runtime::InteropServices::Marshal::FreeHGlobal(buf);
+  return(sent);
 }
 
 bool Publisher::IsCreated()
