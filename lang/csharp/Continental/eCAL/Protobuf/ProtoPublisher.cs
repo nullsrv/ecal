@@ -37,6 +37,20 @@ namespace Continental
           var serialized = message.ToByteArray();
           return (binaryPublisher.Send(serialized, -1) > 0);
         }
+
+        public bool ShmEnableZeroCopy(bool state)
+        {
+          return binaryPublisher.ShmEnableZeroCopy(state);
+        }
+
+        public bool ShmSetBufferCount(int buffering)
+        {
+          return binaryPublisher.ShmSetBufferCount(buffering);
+        }
+        public bool ShmSetAcknowledgeTimeout(long acknowledge_timeout_ms)
+        {
+          return binaryPublisher.ShmSetAcknowledgeTimeout(acknowledge_timeout_ms);
+        }
       }
     }
   }
